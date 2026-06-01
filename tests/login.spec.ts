@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { validLoginData, invalidLoginData, validuser } from '../data/users';
 
-test.describe('Authentication', () => {
+test.describe('Login', () => {
 
   let loginPage: LoginPage;
 

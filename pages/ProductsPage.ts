@@ -10,7 +10,9 @@ export class ProductsPage {
   private readonly productDescriptions: Locator;
   private readonly productImages:       Locator;
   private readonly sortDropdown:        Locator;
+  private readonly cartBadge:           Locator;
   private readonly pageTitle:           Locator;
+  private readonly cartIcon:            Locator;
 
   constructor(page: Page) {
     this.page                 = page;
@@ -20,7 +22,9 @@ export class ProductsPage {
     this.productDescriptions  = page.locator('.inventory_item_desc');
     this.productImages        = page.locator('.inventory_item_img img');
     this.sortDropdown         = page.locator('.product_sort_container');
+    this.cartBadge            = page.locator('.shopping_cart_badge');
     this.pageTitle            = page.locator('.title');
+    this.cartIcon             = page.locator('.shopping_cart_link');
   }
 
   //Actions
@@ -49,9 +53,21 @@ export class ProductsPage {
     return await this.productNameLinks.allTextContents();
   }
 
+   async addToCartByName(name: string) {
+    const item = this.page.locator('.inventory_item', { hasText: name });
+    await item.locator('button').click();
+  }
+
+  async removeFromCartByName(name: string) {
+    const item = this.page.locator('.inventory_item', { hasText: name });
+    await item.locator('button').click();
+  }
+
+  async goToCart() {
+    await this.cartIcon.click();
+  }
 
   // Assertions 
-
   async assertOnProductsPage() {
     await expect(this.page).toHaveURL('/inventory.html');
     await expect(this.pageTitle).toHaveText('Products');
@@ -92,5 +108,13 @@ export class ProductsPage {
     for (let i = 0; i < count; i++) {
       await expect(this.productImages.nth(i)).toBeVisible();
     }
+  }
+
+  async assertCartBadgeCount(count: number) {
+    await expect(this.cartBadge).toHaveText(String(count));
+  }
+
+  async assertCartBadgeNotVisible() {
+    await expect(this.cartBadge).not.toBeVisible();
   }
 }
