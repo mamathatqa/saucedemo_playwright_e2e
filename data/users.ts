@@ -14,10 +14,20 @@ export const validLoginData = [
     username:  'visual_user',
     password:  'secret_sauce',
   },
+  {
+    label:    'performance_glitch user',
+    username:  'performance_glitch_user',
+    password:  'secret_sauce',
+  },
 ];
 
 export const validuser = {
   "username": "standard_user",
+  "password":  'secret_sauce'
+};
+
+export const problemuser = {
+  "username": "problem_user",
   "password":  'secret_sauce'
 };
 

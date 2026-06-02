@@ -4,7 +4,7 @@ import { ProductsPage } from '../pages/ProductsPage';
 import { validuser } from '../data/users';
 import { products, TOTAL_PRODUCTS, sortOptions } from '../data/products';
 
-test.describe('Products Page', () => {
+test.describe('Products', () => {
 
   let loginPage:     LoginPage;
   let inventoryPage: ProductsPage;
@@ -17,8 +17,6 @@ test.describe('Products Page', () => {
     await loginPage.login(validuser.username, validuser.password);
     await inventoryPage.assertOnProductsPage();
   });
-
-  // ─── Page load ────────────────────────────────────────────────────
 
   test('should display Products page after login @regression', async () => {
     await inventoryPage.assertOnProductsPage();

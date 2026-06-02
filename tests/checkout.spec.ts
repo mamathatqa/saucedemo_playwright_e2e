@@ -7,7 +7,7 @@ import { validuser } from '../data/users';
 import { products } from '../data/products';
 import { validCheckout, invalidCheckoutData } from '../data/checkout';
 
-test.describe('Checkout Flow', () => {
+test.describe('Checkout', () => {
 
   let loginPage:    LoginPage;
   let productsPage: ProductsPage;
@@ -39,8 +39,6 @@ test.describe('Checkout Flow', () => {
     await cartPage.assertOnCartPage();
 
     await cartPage.proceedToCheckout();
-
-    // Saucedemo allows checkout with empty cart — validate this behaviour
     await checkoutPage.assertOnInfoPage();
   });
 

@@ -24,8 +24,6 @@ test.describe('Cart', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  // ─── From Product Details Page ────────────────────────────────────
-
   test('Add to cart from product details page @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
@@ -60,13 +58,13 @@ test.describe('Cart', () => {
 
   // ─── Cart badge ───────────────────────────────────────────────────
 
-  test('Add single item shows badge count 1 @smoke @regression', async () => {
+  test('Add single item shows badge count 1 @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
 
     await productsPage.assertCartBadgeCount(1);
   });
 
-  test('Add multiple items updates badge correctly @smoke @regression', async () => {
+  test('Add multiple items updates badge correctly @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
     await productsPage.addToCartByName(products[2].name);
@@ -83,9 +81,7 @@ test.describe('Cart', () => {
     await productsPage.assertCartBadgeNotVisible();
   });
 
-  // ─── Cart page navigation ─────────────────────────────────────────
-
-  test('Cart icon navigates to cart page @smoke @regression', async () => {
+  test('Cart icon navigates to cart page @regression', async () => {
     await productsPage.goToCart();
 
     await cartPage.assertOnCartPage();
@@ -100,8 +96,6 @@ test.describe('Cart', () => {
 
     await productsPage.assertOnProductsPage();
   });
-
-  // ─── Cart page content ────────────────────────────────────────────
 
   test('Cart shows correct items quantities and prices @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
@@ -134,8 +128,6 @@ test.describe('Cart', () => {
     await cartPage.assertItemInCart(products[1].name);
   });
 
-  // ─── Cart persistence ─────────────────────────────────────────────
-
   test('Cart persists after page refresh @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
@@ -149,8 +141,6 @@ test.describe('Cart', () => {
     await cartPage.assertItemInCart(products[0].name);
     await cartPage.assertItemInCart(products[1].name);
   });
-
-  // ─── Edge cases ───────────────────────────────────────────────────
 
   test('should show empty cart when no items added @regression', async () => {
     await productsPage.goToCart();

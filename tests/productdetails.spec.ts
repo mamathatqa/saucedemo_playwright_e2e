@@ -6,7 +6,7 @@ import { CartPage } from '../pages/CartPage';
 import { validuser } from '../data/users';
 import { products } from '../data/products';
 
-test.describe('Product Detail Page', () => {
+test.describe('Product Details', () => {
 
   let loginPage:         LoginPage;
   let productsPage:     ProductsPage;
@@ -24,8 +24,6 @@ test.describe('Product Detail Page', () => {
     await loginPage.login(validuser.username, validuser.password);
     await productsPage.assertOnProductsPage();
   });
-
-  // ─── Page load & content ──────────────────────────────────────────
 
   test('should navigate to detail page on product name click @smoke @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
@@ -50,8 +48,6 @@ test.describe('Product Detail Page', () => {
     });
   }
 
-  // ─── Add to cart ──────────────────────────────────────────────────
-
   test('PD_02 - Add to cart button adds item to cart @smoke @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
@@ -69,7 +65,7 @@ test.describe('Product Detail Page', () => {
 
   // ─── Remove from cart ─────────────────────────────────────────────
 
-  test('PD_03 - Remove button removes item from cart @regression', async () => {
+  test('Remove button removes item from cart @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.addToCart();
 
@@ -84,9 +80,7 @@ test.describe('Product Detail Page', () => {
     await productDetailsPage.assertAddToCartButtonVisible();
   });
 
-  // ─── Navigation ───────────────────────────────────────────────────
-
-  test('PD_04 - Back to Products button navigates to inventory @regression', async () => {
+  test('Back to Products button navigates to inventory @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
 

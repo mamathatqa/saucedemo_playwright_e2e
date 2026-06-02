@@ -28,6 +28,11 @@ export class ProductsPage {
   }
 
   //Actions
+
+  async reloadPage() {
+    await this.page.reload();
+  }
+
   async navigate() {
     await this.page.goto('/inventory.html');
   }
