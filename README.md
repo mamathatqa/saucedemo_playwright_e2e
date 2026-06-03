@@ -27,6 +27,7 @@ End-to-end test suite for [Swag Labs (SauceDemo)](https://www.saucedemo.com) bui
 │   └── products.spec.ts
 ├── playwright.config.ts
 ├── package.json
+├── tsconfig.json
 └── README.md
 ```
 
@@ -186,8 +187,8 @@ The project uses a `tsconfig.json` at the root. Key settings:
 **Included in compilation:**
 
 ```
-tests/        pages/        fixtures/
-utils/        data/         playwright.config.ts
+tests/        pages/      playwright.config.ts  
+utils/        data/        
 ```
 
 **Excluded from compilation:**
