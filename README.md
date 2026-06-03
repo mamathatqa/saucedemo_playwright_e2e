@@ -194,12 +194,12 @@ utils/        data/
 **Excluded from compilation:**
 
 ```
-node_modules/     dist/
+node_modules/     test-results/
 ```
 
-> The `dist/` folder is generated automatically — do not commit it to version control. Add it to your `.gitignore`:
+> The `test-results/` folder is generated automatically — do not commit it to version control. Add it to your `.gitignore`:
 > ```
-> dist/
+> test-results/
 > ```
 
 ---
