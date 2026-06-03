@@ -18,22 +18,21 @@ test.describe('Products', () => {
     await inventoryPage.assertOnProductsPage();
   });
 
-  test('should display Products page after login @regression', async () => {
+  test('Products page wird nach der Anmeldung angezeigt @regression', async () => {
     await inventoryPage.assertOnProductsPage();
   });
 
-  test('should display all 6 products @regression', async () => {
+  test('Alle 6 Produkte werden angezeigt @regression', async () => {
     await inventoryPage.assertProductCount(TOTAL_PRODUCTS);
   });
 
-  test('should display all product images @regression', async () => {
+  test('Alle Product Images werden angezeigt @regression', async () => {
     await inventoryPage.assertAllImagesVisible();
   });
 
-  // Product details
-
+  // Produktdetail
   for (const product of products) {
-    test(`should display details for ${product.name} @regression`, async () => {
+    test(`Details für ${product.name} werden angezeigt @regression`, async () => {
       await inventoryPage.assertProductDetails(
         product.name,
         product.price,
@@ -45,7 +44,7 @@ test.describe('Products', () => {
   // Sorting
 
   for (const sort of sortOptions) {
-    test(`should sort products by ${sort.label} @regression`, async () => {
+    test(`Produkte nach ${sort.label} sortieren @regression`, async () => {
       await inventoryPage.sortBy(sort.option);
 
       const expected = (() => {
@@ -72,14 +71,13 @@ test.describe('Products', () => {
       await inventoryPage.assertProductNamesInOrder(expected);
     });
   }
-  // Product details
 
-  test('should navigate to product detail on name click @regression', async ({ page }) => {
+  test('Zur ProduktdetailPage navigieren beim Klick auf Produktname @regression', async ({ page }) => {
     await inventoryPage.clickProductByName(products[0].name);
     await test.expect(page).toHaveURL(/inventory-item\.html/);
   });
 
-  test('should navigate to product detail on image click @regression', async ({ page }) => {
+  test('Zur ProduktdetailPage navigieren beim Klick auf Produktbild @regression', async ({ page }) => {
     await inventoryPage.clickProductImageByName(products[0].name);
     await test.expect(page).toHaveURL(/inventory-item\.html/);
   });

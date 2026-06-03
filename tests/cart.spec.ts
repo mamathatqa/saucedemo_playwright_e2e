@@ -24,7 +24,7 @@ test.describe('Cart', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  test('Add to cart from product details page @regression', async () => {
+  test('Artikel von der Produktdetailpage in den Warenkorb legen @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
     await productDetailsPage.assertAddToCartButtonVisible();
@@ -36,7 +36,7 @@ test.describe('Cart', () => {
     await productDetailsPage.assertAddToCartButtonNotVisible();
   });
 
-  test('Remove button removes item from cart on product details page @regression', async () => {
+  test('Remove-Button entfernt Artikel auf der Produktdetailseite @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.addToCart();
     await productDetailsPage.assertCartBadgeCount(1);
@@ -47,7 +47,7 @@ test.describe('Cart', () => {
     await productDetailsPage.assertAddToCartButtonVisible();
   });
 
-  test('Back to Products button navigates to inventory @regression', async () => {
+  test('Back-Button in Cart Page navigiert zum Inventar @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
 
@@ -56,15 +56,13 @@ test.describe('Cart', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  // ─── Cart badge ───────────────────────────────────────────────────
-
-  test('Add single item shows badge count 1 @regression', async () => {
+  test('Einzelnen Artikel hinzufügen zeigt Badge-Zähler 1 @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
 
     await productsPage.assertCartBadgeCount(1);
   });
 
-  test('Add multiple items updates badge correctly @regression', async () => {
+  test('Mehrere Artikel hinzufügen aktualisiert Badge korrekt @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
     await productsPage.addToCartByName(products[2].name);
@@ -72,7 +70,7 @@ test.describe('Cart', () => {
     await productsPage.assertCartBadgeCount(3);
   });
 
-  test('Remove item from inventory page updates badge @regression', async () => {
+  test('Artikel von der Inventorypage entfernen aktualisiert Badge @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.assertCartBadgeCount(1);
 
@@ -81,13 +79,13 @@ test.describe('Cart', () => {
     await productsPage.assertCartBadgeNotVisible();
   });
 
-  test('Cart icon navigates to cart page @regression', async () => {
+  test('Cart-Symbol navigiert zur Warenkorbseite @regression', async () => {
     await productsPage.goToCart();
 
     await cartPage.assertOnCartPage();
   });
 
-  test('Continue Shopping navigates back to inventory @regression', async () => {
+  test('Continue Shopping Button navigiert zurück zum Inventar @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.goToCart();
     await cartPage.assertOnCartPage();
@@ -97,7 +95,7 @@ test.describe('Cart', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  test('Cart shows correct items quantities and prices @regression', async () => {
+  test('Warenkorb zeigt korrekte Artikel, Mengen und Preise @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
     await productsPage.goToCart();
@@ -114,7 +112,7 @@ test.describe('Cart', () => {
     await cartPage.assertItemQuantity(products[1].name, 1);
   });
 
-  test('Remove item from cart page @regression', async () => {
+  test('Artikel von der CartPage entfernen @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
     await productsPage.goToCart();
@@ -128,7 +126,7 @@ test.describe('Cart', () => {
     await cartPage.assertItemInCart(products[1].name);
   });
 
-  test('Cart persists after page refresh @regression', async () => {
+  test('Cart bleibt nach Pageaktualisierung erhalten @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
     await productsPage.assertCartBadgeCount(2);
@@ -142,7 +140,7 @@ test.describe('Cart', () => {
     await cartPage.assertItemInCart(products[1].name);
   });
 
-  test('should show empty cart when no items added @regression', async () => {
+  test('Empty Cart wird angezeigt wenn keine Artikel hinzugefügt wurden @regression', async () => {
     await productsPage.goToCart();
 
     await cartPage.assertOnCartPage();
@@ -150,14 +148,14 @@ test.describe('Cart', () => {
     await cartPage.assertCartBadgeNotVisible();
   });
 
-  test('should show checkout and continue shopping buttons @regression', async () => {
+  test('Checkout- und Continue Buttons werden angezeigt @regression', async () => {
     await productsPage.goToCart();
 
     await cartPage.assertContinueShoppingButtonVisible();
     await cartPage.assertCheckoutButtonVisible();
   });
 
-  test('should navigate to cart from product details page @regression', async () => {
+  test('Von der Produktdetails Page zum Cart navigieren @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.addToCart();
 

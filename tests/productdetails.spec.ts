@@ -25,19 +25,18 @@ test.describe('Product Details', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  test('should navigate to detail page on product name click @smoke @regression', async () => {
+  test('Zur DetailPage navigieren beim Klick auf Produktname @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
   });
 
-  test('should navigate to detail page on product image click @regression', async () => {
+  test('Zur DetailPage navigieren beim Klick auf Produktbild @regression', async () => {
     await productsPage.clickProductImageByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
   });
 
-  // Product details driven from products.ts — one test per product
   for (const product of products) {
-    test(`should display correct details for ${product.name} @regression`, async () => {
+    test(`Korrekte Details anzeigen für ${product.name} @regression`, async () => {
       await productsPage.clickProductByName(product.name);
       await productDetailsPage.assertOnDetailPage();
 
@@ -48,39 +47,38 @@ test.describe('Product Details', () => {
     });
   }
 
-  test('PD_02 - Add to cart button adds item to cart @smoke @regression', async () => {
+  test('In-den-Cart-Schaltfläche fügt Artikel zum Warenkorb hinzu @smoke @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
 
-    // Before adding — add to cart button should be visible
+// Vor dem Hinzufügen – der „In den Warenkorb“-Button sollte sichtbar sein.
     await productDetailsPage.assertAddToCartButtonVisible();
 
     await productDetailsPage.addToCart();
 
-    // After adding — badge shows 1, remove button appears
+// Nach dem Hinzufügen – Badge zeigt 1 an, Entfernen-Button erscheint.
     await productDetailsPage.assertCartBadgeCount(1);
     await productDetailsPage.assertRemoveButtonVisible();
     await productDetailsPage.assertAddToCartButtonNotVisible();
   });
 
-  // ─── Remove from cart ─────────────────────────────────────────────
 
-  test('Remove button removes item from cart @regression', async () => {
+test('Remove-Button entfernt Artikel aus dem Warenkorb @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.addToCart();
 
-    // Verify item was added
+// Überprüfen, ob das Element hinzugefügt wurde
     await productDetailsPage.assertCartBadgeCount(1);
     await productDetailsPage.assertRemoveButtonVisible();
 
     await productDetailsPage.removeFromCart();
 
-    // After removing — badge gone, add to cart button back
+// Nach dem Entfernen – Badge verschwunden, „In den Cart-Button wieder da
     await productDetailsPage.assertCartBadgeNotVisible();
     await productDetailsPage.assertAddToCartButtonVisible();
   });
 
-  test('Back to Products button navigates to inventory @regression', async () => {
+  test('Zurück-zur-Produktliste-Schaltfläche navigiert zum Inventar @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.assertOnDetailPage();
 
@@ -89,7 +87,7 @@ test.describe('Product Details', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  test('should navigate to cart page from detail page @regression', async () => {
+  test('Von der Detailseite zur Warenkorbseite navigieren @regression', async () => {
     await productsPage.clickProductByName(products[0].name);
     await productDetailsPage.addToCart();
 

@@ -24,12 +24,12 @@ test.describe('Navigation Menu', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  test('NAV_01 - Burger menu opens on click and shows all items @regression', async () => {
+  test('Navigation-Menü öffnet sich beim Klicken und zeigt alle Einträge @regression', async () => {
     await navigationPage.openBurgerMenu();
     await navigationPage.assertMenuOpen();
   });
 
-  test('NAV_02 - All Items link navigates to inventory page @regression', async () => {
+  test('Alle-Artikel-Link navigiert zur InventoryPage @regression', async () => {
     // Navigate away from inventory first
     await productsPage.goToCart();
 
@@ -39,7 +39,7 @@ test.describe('Navigation Menu', () => {
     await navigationPage.assertOnInventoryPage();
   });
 
-  test('About link navigates to Sauce Labs website @regression', async () => {
+  test('About-Link navigiert zur Sauce-Labs-Website @regression', async () => {
     await navigationPage.openBurgerMenu();
 
     // About opens in same tab — wait for navigation
@@ -50,13 +50,13 @@ test.describe('Navigation Menu', () => {
     await expect(navigationPage.page).toHaveURL(/saucelabs\.com/);
   });
 
-  test('Logout redirects to login page @regression', async () => {
+  test('Abmelden leitet zur Anmeldeseite weiter @regression', async () => {
     await navigationPage.openBurgerMenu();
     await navigationPage.clickLogout();
     await navigationPage.assertOnLoginPage();
   });
 
-  test('Reset App State clears cart badge and resets items @regression', async () => {
+  test('App-Status-Zurücksetzen löscht Warenkorb-Badge und setzt Artikel zurück @regression', async () => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
     await navigationPage.assertCartBadgeCount(2);
@@ -71,7 +71,7 @@ test.describe('Navigation Menu', () => {
     await productsPage.assertButtonTextForProduct(products[1].name, 'Add to cart');
   });
 
-  test('Menu closes via X button @regression', async () => {
+  test('Menü schließt sich über X-Schaltfläche @regression', async () => {
     await navigationPage.openBurgerMenu();
     await navigationPage.assertMenuOpen();
     await navigationPage.closeBurgerMenu();
@@ -96,26 +96,26 @@ test.describe('UI & Visual', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  test('Page title is Swag Labs on inventory page @regression', async () => {
+  test('Pagetitel auf der Inventarseite ist Swag Labs @regression', async () => {
     await navigationPage.assertPageTitle('Swag Labs');
   });
 
-  test('No broken images on inventory page @regression', async () => {
+  test('Keine defekten Bilder auf der Inventarseite @regression', async () => {
     await navigationPage.assertAllImagesLoaded();
   });
 
-  test('Problem user shows similar images (known bug) @regression', async ({ page }) => {
-    // Login as problem_user
+  test('problem_user zeigt gleiche Bilder (bekannter Fehler) @regression', async ({ page }) => {
+    // Login als problem_user
     await page.goto('/');
     await loginPage.navigate();
     await loginPage.login(problemuser.username, problemuser.password);
     await productsPage.assertOnProductsPage();
 
-    // All images are the same — known bug for problem_user
+    // bekannter Fehler
     await navigationPage.assertProblemUserImagesBroken();
   });
 
-  test('Footer displays correct copyright text @regression', async () => {
+  test('Footer zeigt korrekten Copyright-Text @regression', async () => {
     await navigationPage.assertFooterVisible();
     await navigationPage.assertFooterText();
   });

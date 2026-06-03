@@ -12,32 +12,32 @@ test.describe('Login', () => {
   });
 
   for (const scenario of validLoginData) {
-    test(`should login successfully with ${scenario.label} @regression`, async () => {
+    test(`Erfolgreich anmelden mit ${scenario.label} @regression`, async () => {
       await loginPage.login(scenario.username, scenario.password);
       await loginPage.assertRedirectedToInventory();
     });
   }
 
   for (const scenario of invalidLoginData) {
-    test(`should show error for ${scenario.label} @regression`, async () => {
+    test(`Fehlermeldung anzeigen für ${scenario.label} @regression`, async () => {
       await loginPage.login(scenario.username, scenario.password);
       await loginPage.assertErrorMessage(scenario.error);
     });
   }
 
-  test('should logout the application @regression',async ({ page }) => {
+  test('Abmeldung aus der NavigationMenu @regression', async ({ page }) => {
     await loginPage.login(validuser.username, validuser.password);
     await page.click('#react-burger-menu-btn');
     await page.click('#logout_sidebar_link');
     await loginPage.assertOnLoginPage();
   })
 
-  test('should not access the inventory page without login @regression', async({ page }) => {
+  test('Inventory Page ohne Anmeldung nicht zugänglich @regression', async({ page }) => {
     await page.goto('/inventory.html')
     await loginPage.assertErrorMessage("Epic sadface: You can only access '/inventory.html' when you are logged in.");
   })
 
-  test('should not access inventory via back button after logout @regression', async ({ page }) => {
+  test('Inventory Page nach Abmeldung nicht über Back Button erreichbar @regression', async ({ page }) => {
     // Logout via menu
     await loginPage.login(validuser.username, validuser.password);
     await page.click('#react-burger-menu-btn');

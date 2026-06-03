@@ -25,7 +25,6 @@ test.describe('Checkout', () => {
     await productsPage.assertOnProductsPage();
   });
 
-  //Helper method
   async function addItemsAndGoToCart(page: any) {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.addToCartByName(products[1].name);
@@ -34,7 +33,7 @@ test.describe('Checkout', () => {
     await cartPage.proceedToCheckout();
   }
 
-  test('Proceed to checkout with empty cart @regression', async () => {
+  test('Zur Checkout mit leerem Warenkorb @regression', async () => {
     await productsPage.goToCart();
     await cartPage.assertOnCartPage();
 
@@ -42,7 +41,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertOnInfoPage();
   });
 
-  test('Proceed to checkout with items in cart loads info page @regression', async ({ page }) => {
+  test('Zur Checkout mit Artikeln im Warenkorb lädt die Infoseite @regression', async ({ page }) => {
     await productsPage.addToCartByName(products[0].name);
     await productsPage.goToCart();
     await cartPage.proceedToCheckout();
@@ -50,7 +49,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertOnInfoPage();
   });
 
-  test('Submit valid info proceeds to overview page @regression', async ({ page }) => {
+  test('Gültige Eingaben weiterleiten zur Overview Page @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
     await checkoutPage.assertOnInfoPage();
 
@@ -63,9 +62,8 @@ test.describe('Checkout', () => {
     await checkoutPage.assertOnOverviewPage();
   });
 
-
   for (const scenario of invalidCheckoutData) {
-    test(`should show error for ${scenario.label} @regression`, async ({ page }) => {
+    test(`Fehlermeldung anzeigen für ${scenario.label} @regression`, async ({ page }) => {
       await addItemsAndGoToCart(page);
       await checkoutPage.assertOnInfoPage();
 
@@ -80,7 +78,7 @@ test.describe('Checkout', () => {
     });
   }
 
-  test('Overview shows correct items and prices @regression', async ({ page }) => {
+  test('Cart Overview zeigt korrekte Artikel und Preise @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
 
     await checkoutPage.fillInfo(
@@ -98,7 +96,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertItemPriceInOverview(products[1].name, products[1].price);
   });
 
-  test('Tax is calculated and displayed @regression', async ({ page }) => {
+  test('Steuer wird berechnet und angezeigt @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
     await checkoutPage.fillInfo(
       validCheckout.firstName,
@@ -109,7 +107,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertTaxVisible();
   });
 
-  test('Total equals item total plus tax @regression', async ({ page }) => {
+  test('Total Betrag entspricht Artikelsumme plus Steuer @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
     await checkoutPage.fillInfo(
       validCheckout.firstName,
@@ -120,7 +118,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertTotalEqualsItemTotalPlusTax();
   });
 
-  test('Finish button completes order and shows confirmation @regression', async ({ page }) => {
+  test('Finish Button schließt Bestellung ab und zeigt Bestätigung @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
     await checkoutPage.fillInfo(
       validCheckout.firstName,
@@ -133,7 +131,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertConfirmationMessage();
   });
 
-  test('Back Home clears cart and returns to inventory @regression', async ({ page }) => {
+  test('Back Home Button leert Warenkorb und kehrt zum Inventar zurück @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
     await checkoutPage.fillInfo(
       validCheckout.firstName,
@@ -149,7 +147,7 @@ test.describe('Checkout', () => {
     await checkoutPage.assertCartIsEmpty();
   });
 
-  test('Cancel on info page returns to cart @regression', async ({ page }) => {
+  test('Abbrechen auf der AboutPage kehrt zum Warenkorb zurück @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
     await checkoutPage.assertOnInfoPage();
     await checkoutPage.cancelFromInfo();
@@ -161,7 +159,7 @@ test.describe('Checkout', () => {
     await cartPage.assertItemInCart(products[1].name);
   });
 
-  test('Cancel on overview page returns to inventory @regression', async ({ page }) => {
+  test('Abbrechen auf der Overview page kehrt zum Inventar zurück @regression', async ({ page }) => {
     await addItemsAndGoToCart(page);
 
     await checkoutPage.fillInfo(
